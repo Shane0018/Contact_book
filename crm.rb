@@ -2,7 +2,7 @@ require_relative 'contact'
 class CRM
 
   def initialize
-
+    
   end
 
   def main_menu
@@ -54,7 +54,7 @@ class CRM
     print "Enter Attribute You Wish to Change: (first_name, last_name, email, note): "
     key = gets.chomp 
     print "Enter New Value of Attribute: "
-    value = gets.chomp 
+    value = gets.chomp +++++++
     contact_to_be_modified.update(key, value) 
   end
 
@@ -64,7 +64,7 @@ class CRM
     contact_to_be_deleted = Contact.find(id) 
     contact_to_be_deleted.delete 
   end
-5
+
   def display_all_contacts
     p Contact.all 
   end
@@ -79,5 +79,10 @@ class CRM
 
 end
 
+at_exit do 
+  ActiveRecord::Base.connection.close
+end 
+
 a_crm_app = CRM.new 
 a_crm_app.main_menu
+
