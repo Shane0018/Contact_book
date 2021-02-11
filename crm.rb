@@ -43,7 +43,12 @@ class CRM
     email = gets.chomp 
     print "Enter a Note: "
     note = gets.chomp 
-    Contact.create(first_name, last_name, email, note) 
+    contact = Contact.create(
+      first_name: first_name,
+      last_name: last_name,
+      email: email,
+      note: note
+    )
   end
 
   def modify_existing_contact
@@ -51,11 +56,17 @@ class CRM
     user_input = gets.chomp 
     id = user_input.to_i 
     contact_to_be_modified = Contact.find(id)
-    print "Enter Attribute You Wish to Change: (first_name, last_name, email, note): "
-    key = gets.chomp 
+    print "Enter Attribute You Wish to Change: (print '1' for first_name, '2' for last_name, '3' for email, '4' for note): "
+    key = gets.chomp.to_i 
+    case key 
+    when 1 then key = "first_name"
+    when 2 then key = "last_name"
+    when 3 then key = "email"
+    when 4 then key = "note"
+    end 
     print "Enter New Value of Attribute: "
-    value = gets.chomp +++++++
-    contact_to_be_modified.update(key, value) 
+    value = gets.chomp 
+    contact_to_be_modified.update(key => value)
   end
 
   def delete_contact
@@ -74,7 +85,8 @@ class CRM
     attribute_to_be_searched_by = gets.chomp 
     print "Enter the Value of the Attribute You Wish to Search By: "
     value_of_attr_to_be_searched_by = gets.chomp 
-    puts Contact.find_by(attribute_to_be_searched_by, value_of_attr_to_be_searched_by)
+    contact = Contact.find_by(attribute_to_be_searched_by => value_of_attr_to_be_searched_by)
+    p contact 
   end
 
 end
